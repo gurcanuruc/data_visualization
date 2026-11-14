@@ -14,7 +14,7 @@ contradictions reveal where the dataset is incomplete, which is the main message
 
 | Member | Student ID | Contribution |
 |---|---|---|
-| Dila Okan | 2022555048 | Charts 1-3 (`src/member1.py`): WebGL plant map, renewable-share choropleth with threshold slider and summary metrics, country → fuel treemap; shared fuel color palette |
+| Dila Okan | 2022555050 | Charts 1-3 (`src/member1.py`): WebGL plant map, renewable-share choropleth with threshold slider and summary metrics, country → fuel treemap; shared fuel color palette |
 | Mehmet Ulaş Uslu | 2022555068 | Charts 4-6 (`src/member2.py`): primary → backup fuel Sankey, capacity-factor box plot, commissioning-year timeline with dynamic coverage warning; random-forest capacity-factor regression (ML) |
 | Gürcan Uruç | 2022555067 | Exploratory analysis (`notebooks/01_eda.ipynb`), data preprocessing (`src/data_loader.py`), charts 7-10 (`src/member3.py`): estimate-accuracy scatter, K-Means country clustering (map + parallel coordinates), data reality check; project structure & shared sidebar filters |
 
