@@ -16,7 +16,7 @@ contradictions reveal where the dataset is incomplete, which is the main message
 |---|---|---|
 | Dila _(surname)_ | _ID_ | _TODO (Member 1): charts 1-3 — plant map, renewable-share choropleth, country → fuel treemap_ |
 | _Member 2 name_ | _ID_ | _TODO (Member 2): charts 4-6 — Sankey, capacity-factor box plot, timeline; capacity-factor regression (ML)_ |
-| Gürcan Uruç | _ID_ | Exploratory analysis (`notebooks/01_eda.ipynb`), data preprocessing (`src/data_loader.py`), charts 7-10 (`src/member3.py`): estimate-accuracy scatter, K-Means country clustering (map + parallel coordinates), data reality check; project structure & shared sidebar filters |
+| Gürcan Uruç | 2022555067 | Exploratory analysis (`notebooks/01_eda.ipynb`), data preprocessing (`src/data_loader.py`), charts 7-10 (`src/member3.py`): estimate-accuracy scatter, K-Means country clustering (map + parallel coordinates), data reality check; project structure & shared sidebar filters |
 
 ## Dataset
 
