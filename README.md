@@ -8,14 +8,14 @@ itself can be trusted**. Findings derived from the data are checked against offi
 contradictions reveal where the dataset is incomplete, which is the main message of the project:
 *well-prepared data matters as much as the analysis built on it.*
 
-**Live demo:** _TODO (optional: Streamlit Community Cloud link)_
+**Repository:** https://github.com/gurcanuruc/data_visualization
 
 ## Team
 
 | Member | Student ID | Contribution |
 |---|---|---|
-| Dila _(surname)_ | _ID_ | _TODO (Member 1): charts 1-3 — plant map, renewable-share choropleth, country → fuel treemap_ |
-| _Member 2 name_ | _ID_ | _TODO (Member 2): charts 4-6 — Sankey, capacity-factor box plot, timeline; capacity-factor regression (ML)_ |
+| Dila Okan | 2022555048 | Charts 1-3 (`src/member1.py`): WebGL plant map, renewable-share choropleth with threshold slider and summary metrics, country → fuel treemap; shared fuel color palette |
+| Mehmet Ulaş Uslu | 2022555068 | Charts 4-6 (`src/member2.py`): primary → backup fuel Sankey, capacity-factor box plot, commissioning-year timeline with dynamic coverage warning; random-forest capacity-factor regression (ML) |
 | Gürcan Uruç | 2022555067 | Exploratory analysis (`notebooks/01_eda.ipynb`), data preprocessing (`src/data_loader.py`), charts 7-10 (`src/member3.py`): estimate-accuracy scatter, K-Means country clustering (map + parallel coordinates), data reality check; project structure & shared sidebar filters |
 
 ## Dataset
@@ -75,22 +75,25 @@ These limitations are shown as notes under the affected charts rather than hidde
 
 | # | Chart | Type | Insight | Owner |
 |---|---|---|---|---|
-| 1 | Global plant map | Map ⭐ | _TODO (Member 1)_ | Member 1 |
-| 2 | Renewable share by country | Choropleth ⭐ | _TODO (Member 1)_ | Member 1 |
-| 3 | Country → fuel hierarchy | Treemap ⭐ | _TODO (Member 1)_ | Member 1 |
-| 4 | Primary → secondary fuel | Sankey ⭐ | _TODO (Member 2)_ | Member 2 |
-| 5 | Capacity factor by fuel | Box plot | _TODO (Member 2)_ | Member 2 |
-| 6 | New capacity by commissioning year | Area | _TODO (Member 2)_ | Member 2 |
-| 7 | Estimated vs reported generation | Scatter (log axes) | WRI's estimate is accurate for wind, solar, nuclear and coal (median ratio ≈ 0.93-0.99) but badly overestimates backup plants (oil: plants produce only ~2% of the estimate, gas ~56%) and underestimates waste plants (~30×). | Gürcan |
-| 8 | Countries grouped by energy mix | K-Means → choropleth ⭐ | Four groups: hydro-dominant (Norway, Brazil, Canada…), gas-dominant (Gulf states, Algeria…), coal-dominant (China, India…), mixed (France, Argentina…). Denmark's placement in the coal group exposes the coverage gap. | Gürcan |
-| 9 | What separates the clusters | Parallel coordinates ⭐ | Each cluster is defined by one dominant fuel axis; the mixed cluster spreads over several. | Gürcan |
-| 10 | Data reality check | Bar chart + metrics | Dataset vs official end-2019 capacity: big utility-scale fleets are complete, small distributed wind/solar is mostly missing. | Gürcan |
+| 1 | Global plant map | WebGL scatter map ⭐ | The 3,000 largest plants (shown by default) hold 71% of world capacity; large coal and hydro plants concentrate in East Asia, gas in North America and the Middle East. | Dila Okan |
+| 2 | Renewable share by country | Choropleth ⭐ | Among countries above 5 GW, hydro countries lead (Paraguay ~100%, Norway 96%) and Gulf states sit near 0%; Turkey ranks #28 (30%), ahead of China, the US and Germany — but see the coverage limitation. | Dila Okan |
+| 3 | Country → fuel hierarchy | Treemap ⭐ | China and the US alone hold 46% of the capacity in the data (top 10 countries: 70%), with very different mixes: China and India ~2/3 coal, the US led by gas (45%). | Dila Okan |
+| 4 | Primary → backup fuel | Sankey ⭐ | 97% of multi-fuel capacity is fossil; the dominant flows are gas → oil (342 GW) and coal → oil (295 GW): oil is the standard backup fuel. Multi-fuel plants are large (median 105 MW vs 15 MW). | Mehmet Ulaş Uslu |
+| 5 | Capacity factor by fuel | Box plot | Output depends on the plant's role in the grid: nuclear runs almost constantly (median 0.84), wind (0.31) and solar (0.19) are low but steady, gas splits into baseload and peaker plants (median 0.09, wide spread), oil ≈ 0 (backup). | Mehmet Ulaş Uslu |
+| 6 | New capacity by commissioning year | Area | New investment moved from the gas wave of the early 2000s (peak 2002, 71 GW) to wind (2015) and solar (2016); the chart warns that missing years make it mostly US history. | Mehmet Ulaş Uslu |
+| 7 | Estimated vs reported generation | Scatter (log axes) | WRI's estimate is accurate for wind, solar, nuclear and coal (median ratio ≈ 0.93-0.99) but badly overestimates backup plants (oil: plants produce only ~2% of the estimate, gas ~56%) and underestimates waste plants (~30×). | Gürcan Uruç |
+| 8 | Countries grouped by energy mix | K-Means → choropleth ⭐ | Four groups: hydro-dominant (Norway, Brazil, Canada…), gas-dominant (Gulf states, Algeria…), coal-dominant (China, India…), mixed (France, Argentina…). Denmark's placement in the coal group exposes the coverage gap. | Gürcan Uruç |
+| 9 | What separates the clusters | Parallel coordinates ⭐ | Each cluster is defined by one dominant fuel axis; the mixed cluster spreads over several. | Gürcan Uruç |
+| 10 | Data reality check | Bar chart + metrics | Dataset vs official end-2019 capacity: big utility-scale fleets are complete, small distributed wind/solar is mostly missing. | Gürcan Uruç |
 
 ⭐ = advanced visualization.
 
 **Interactive components**
 - *Sidebar (all charts unless noted):* primary-fuel multiselect, country dropdown, capacity range slider,
   "known commissioning year only" checkbox; section selector.
+- *Part 1:* number-of-plants slider (top N by capacity) and map theme selector (chart 1); minimum-capacity
+  threshold slider (chart 2); click-to-drill-down (chart 3).
+- *Part 2:* top-N fuel-pair slider (chart 4); legend toggling of fuels (charts 5-6).
 - *Part 3:* country selector limited to countries with reported generation (chart 7); number of clusters `k`
   slider and minimum-capacity threshold (charts 8-9); country selection by dropdown **or by clicking the map** —
   highlights the country and its cluster on the map and in the parallel coordinates and lists the cluster members;
@@ -102,7 +105,7 @@ meaningless, and reported generation exists for only 29 countries.
 
 ## Machine learning
 
-**1. K-Means clustering of countries (unsupervised) — Gürcan**
+**1. K-Means clustering of countries (unsupervised) — Gürcan Uruç**
 - *Features:* each country's capacity share per fuel (coal, gas, oil, nuclear, hydro, wind, solar, biomass,
   other — small fuels merged into "other"). Countries below 5 GW total capacity are excluded (adjustable), because
   1-2 plants make their shares meaningless → 74 countries.
@@ -112,7 +115,14 @@ meaningless, and reported generation exists for only 29 countries.
 - *Reproducibility:* `random_state=42`, `n_init=50` — with fewer restarts the result depended on the row order.
 - *Cluster names* are generated from the centroids ("⟨fuel⟩-dominant" if one fuel ≥ 50%, otherwise "Mixed").
 
-**2. Capacity-factor regression (supervised) — _TODO (Member 2)_**
+**2. Capacity-factor regression (supervised) — Mehmet Ulaş Uslu**
+- *Target:* reported 2017 capacity factor (generation ÷ capacity × 8,760 h) — not raw generation, which is almost
+  capacity × a constant, and not WRI's estimate, which would only reproduce WRI's assumptions.
+- *Features:* fuel type (label-encoded), plant age, capacity, latitude; plants with all values known (~9,000,
+  mostly US).
+- *Model:* random forest (50 trees, max depth 5), 80/20 train-test split → **test R² ≈ 0.41**.
+- *Result:* fuel type explains most of the prediction (importance ≈ 0.77), plant age ≈ 0.10, latitude ≈ 0.07,
+  capacity ≈ 0.05 — confirming that a plant's role in the grid, set by its fuel, drives how much it runs.
 
 ## Sources for the reality check (chart 10)
 
@@ -127,8 +137,8 @@ meaningless, and reported generation exists for only 29 countries.
 ## Setup
 
 ```bash
-git clone https://github.com/<user>/<repo>.git
-cd <repo>
+git clone https://github.com/gurcanuruc/data_visualization.git
+cd data_visualization
 python -m venv .venv
 # Windows: .venv\Scripts\activate   |   macOS/Linux: source .venv/bin/activate
 pip install -r requirements.txt
