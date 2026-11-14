@@ -1,5 +1,5 @@
 """
-CEN445 - Member 1 (Dila) Visualizations
+CEN445 - Member1 (Dila) Visualizations
 Part 1: Map, Renewable Share Choropleth, and Fuel Treemap
 """
 import streamlit as st
