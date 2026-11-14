@@ -14,6 +14,7 @@ import plotly.graph_objects as go
 import streamlit as st
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
+from src.member1 import FUEL_COLORS
 
 from src.data_loader import load_clean
 
@@ -48,7 +49,7 @@ def chart_7(df):
     d = all_d if choice == "All countries" else all_d[all_d["country_long"] == choice.rsplit(" (", 1)[0]]
 
     fig = px.scatter(
-        d, x="estimated_generation_gwh_2017", y="generation_gwh_2017", color="primary_fuel",
+        d, x="estimated_generation_gwh_2017", y="generation_gwh_2017", color="primary_fuel",        color_discrete_map=FUEL_COLORS,
         log_x=True, log_y=True, opacity=0.5, render_mode="webgl", hover_name="name",
         hover_data={"country_long": True, "capacity_mw": ":.0f"},
         labels={"estimated_generation_gwh_2017": "Estimated generation 2017 (GWh, WRI model)",
